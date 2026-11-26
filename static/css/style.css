@@ -1,0 +1,4283 @@
+@import url(
+    "https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+);
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+:root {
+    --cream: #fff4bd;
+    --white: #fff9e8;
+    --lavender: #dca7f3;
+    --purple: #21133f;
+    --deep-purple: #17102f;
+    --input-bg: rgba(35, 30, 86, 0.88);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: var(--deep-purple);
+    color: var(--white);
+
+    font-family: "VT323", monospace;
+}
+
+button,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
+
+.landing-page {
+    position: relative;
+
+    min-height: 100vh;
+    width: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 1;
+
+    transition:
+        opacity 1.2s ease;
+}
+
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.background {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    background-image:
+        url("../images/landing.png");
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   LANDING PAGE STARS
+   ========================================================= */
+
+.star-field {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.twinkle-star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    background: var(--white);
+
+    image-rendering: pixelated;
+
+    opacity: 0.25;
+
+    animation-name: twinkle;
+    animation-timing-function: steps(4);
+    animation-iteration-count: infinite;
+}
+
+.twinkle-star.small {
+    width: 2px;
+    height: 2px;
+}
+
+.twinkle-star.large {
+    width: 4px;
+    height: 4px;
+}
+
+.twinkle-star.cross {
+    width: 3px;
+    height: 3px;
+}
+
+.twinkle-star.cross::before,
+.twinkle-star.cross::after {
+    content: "";
+
+    position: absolute;
+
+    background: var(--white);
+}
+
+.twinkle-star.cross::before {
+    width: 1px;
+    height: 7px;
+
+    left: 1px;
+    top: -2px;
+}
+
+.twinkle-star.cross::after {
+    width: 7px;
+    height: 1px;
+
+    left: -2px;
+    top: 1px;
+}
+
+@keyframes twinkle {
+
+    0% {
+        opacity: 0.15;
+    }
+
+    25% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.15;
+    }
+}
+
+
+/* =========================================================
+   CRT OVERLAY
+   ========================================================= */
+
+.background-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    box-shadow:
+        inset 0 0 120px rgba(10, 5, 30, 0.7);
+}
+
+
+/* =========================================================
+   DEEP SPACE JOURNEY OVERLAY
+   ========================================================= */
+
+.space-journey {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(38, 23, 79, 0.35),
+            rgba(8, 5, 25, 0.88)
+        );
+
+    transition:
+        opacity 1.2s ease;
+}
+
+.space-journey.active {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   ORIGINAL JOURNEY STAR LAYERS
+   ========================================================= */
+
+.journey-stars {
+    position: absolute;
+    inset: -20%;
+
+    width: 140%;
+    height: 140%;
+
+    overflow: hidden;
+}
+
+.journey-star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    background: var(--white);
+
+    image-rendering: pixelated;
+
+    opacity: 0.7;
+
+    box-shadow:
+        0 0 3px rgba(255, 249, 232, 0.5);
+}
+
+.journey-stars-far .journey-star {
+    width: 2px;
+    height: 2px;
+
+    opacity: 0.4;
+}
+
+.journey-stars-mid .journey-star {
+    width: 3px;
+    height: 3px;
+
+    opacity: 0.65;
+}
+
+.journey-stars-near .journey-star {
+    width: 4px;
+    height: 4px;
+
+    opacity: 0.85;
+}
+
+.journey-star.large {
+    width: 5px;
+    height: 5px;
+
+    box-shadow:
+        0 -5px 0 var(--white),
+        0 5px 0 var(--white),
+        -5px 0 0 var(--white),
+        5px 0 0 var(--white);
+}
+
+
+/* =========================================================
+   JOURNEY STAR MOVEMENT
+   ========================================================= */
+
+.space-journey.active .journey-stars-far {
+    animation:
+        journeyFarStars 14s linear infinite;
+}
+
+.space-journey.active .journey-stars-mid {
+    animation:
+        journeyMidStars 9s linear infinite;
+}
+
+.space-journey.active .journey-stars-near {
+    animation:
+        journeyNearStars 5s linear infinite;
+}
+
+@keyframes journeyFarStars {
+
+    from {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(-8%, 12%, 0)
+            scale(1.03);
+    }
+}
+
+@keyframes journeyMidStars {
+
+    from {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(-18%, 25%, 0)
+            scale(1.08);
+    }
+}
+
+@keyframes journeyNearStars {
+
+    from {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(-35%, 45%, 0)
+            scale(1.2);
+    }
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.content {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(900px, 90%);
+
+    padding: 60px 20px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   JUPITER DIVIDER
+   ========================================================= */
+
+.jupiter-divider {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-bottom: 26px;
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 0.2s;
+}
+
+.divider-star {
+    color: var(--cream);
+
+    font-size: 20px;
+
+    text-shadow:
+        2px 2px 0 var(--purple);
+}
+
+
+/* =========================================================
+   CSS JUPITER ICON
+   ========================================================= */
+
+.jupiter-icon {
+    position: relative;
+
+    width: 82px;
+    height: 82px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    image-rendering: pixelated;
+}
+
+.jupiter-planet {
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f5d9a4 0%,
+            #d9a66e 20%,
+            #f1c68d 34%,
+            #b97955 45%,
+            #e8bd85 57%,
+            #c88c65 70%,
+            #f0cf99 82%,
+            #b56e55 100%
+        );
+
+    border: 3px solid var(--purple);
+
+    box-shadow:
+        4px 4px 0 rgba(20, 8, 45, 0.8);
+}
+
+.jupiter-band {
+    position: absolute;
+
+    left: -5px;
+
+    width: 68px;
+    height: 7px;
+
+    opacity: 0.8;
+}
+
+.band-1 {
+    top: 13px;
+
+    background: #fff0c4;
+}
+
+.band-2 {
+    top: 27px;
+
+    background: #9c5e52;
+}
+
+.band-3 {
+    top: 40px;
+
+    background: #f4d49a;
+}
+
+.jupiter-ring {
+    position: absolute;
+
+    width: 84px;
+    height: 26px;
+
+    border: 4px solid rgba(255, 244, 189, 0.8);
+
+    border-radius: 50%;
+
+    transform: rotate(-12deg);
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.hero h1 {
+    margin: 0;
+
+    color: var(--cream);
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size:
+        clamp(28px, 5vw, 52px);
+
+    line-height: 1.35;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        4px 4px 0 var(--purple),
+        7px 7px 0 rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 0.45s;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro {
+    margin: 22px 0 0;
+
+    max-width: 650px;
+
+    color: var(--white);
+
+    font-size: 24px;
+
+    line-height: 1.25;
+
+    text-shadow:
+        2px 2px 0 rgba(30, 10, 60, 0.8);
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 0.8s;
+}
+
+
+/* =========================================================
+   WISH AREA
+   ========================================================= */
+
+.wish-area {
+    margin-top: 52px;
+
+    transition:
+        transform 0.8s ease,
+        opacity 0.8s ease;
+}
+
+.wish-area h2 {
+    margin: 0 0 24px;
+
+    color: var(--cream);
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size:
+        clamp(15px, 2vw, 20px);
+
+    line-height: 1.7;
+
+    text-shadow:
+        3px 3px 0 var(--purple);
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 1.15s;
+}
+
+.wish-area h2 span {
+    color: var(--lavender);
+}
+
+
+/* =========================================================
+   WISH FORM
+   ========================================================= */
+
+#wish-form {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   WISH BOX WRAPPER
+   ========================================================= */
+
+.wish-box-wrapper {
+    position: relative;
+
+    width: min(650px, 100%);
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    perspective: 1000px;
+}
+
+
+/* =========================================================
+   WISH TEXTAREA
+   ========================================================= */
+
+#wish-input {
+    width: 100%;
+    height: 150px;
+
+    padding: 22px;
+
+    resize: none;
+
+    color: var(--white);
+
+    background: var(--input-bg);
+
+    border: 3px solid var(--lavender);
+
+    border-radius: 6px;
+
+    outline: none;
+
+    font-size: 24px;
+
+    line-height: 1.2;
+
+    box-shadow:
+        5px 5px 0 rgba(20, 8, 45, 0.8);
+
+    transition:
+        opacity 0.4s ease;
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 1.35s;
+}
+
+#wish-input::placeholder {
+    color:
+        rgba(255, 249, 232, 0.6);
+}
+
+#wish-input:focus {
+    border-color: var(--cream);
+
+    box-shadow:
+        5px 5px 0 rgba(20, 8, 45, 0.8),
+        0 0 12px rgba(220, 167, 243, 0.35);
+}
+
+
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+#send-button {
+    margin-top: 26px;
+
+    padding: 18px 28px;
+
+    color: var(--purple);
+
+    background: var(--cream);
+
+    border: 3px solid var(--purple);
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    box-shadow:
+        5px 5px 0 var(--purple);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.5s ease;
+
+    opacity: 0;
+
+    animation:
+        fadeInUp 0.8s ease forwards;
+
+    animation-delay: 1.55s;
+}
+
+#send-button:hover {
+    transform:
+        translate(2px, 2px);
+
+    box-shadow:
+        3px 3px 0 var(--purple);
+}
+
+#send-button:active {
+    transform:
+        translate(5px, 5px);
+
+    box-shadow:
+        0 0 0 var(--purple);
+}
+
+#send-button:disabled {
+    cursor: default;
+}
+
+
+/* =========================================================
+   FADE-IN ANIMATION
+   ========================================================= */
+
+@keyframes fadeInUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   CAPSULE
+   ========================================================= */
+
+.capsule {
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    opacity: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 4px solid var(--purple);
+
+    border-radius: 50%;
+
+    box-shadow:
+        6px 6px 0 var(--purple),
+        inset 0 0 0 4px #e8dcae;
+
+    image-rendering: pixelated;
+
+    overflow: visible;
+
+    transition:
+        transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.6s ease;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   CAPSULE TOP DETAILS
+   ========================================================= */
+
+.capsule::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+    left: 50%;
+
+    width: 36px;
+    height: 6px;
+
+    transform:
+        translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -10px 6px 0 var(--lavender),
+        10px 6px 0 var(--lavender);
+
+    image-rendering: pixelated;
+}
+
+
+/* =========================================================
+   CAPSULE WINDOW
+   ========================================================= */
+
+.capsule-window {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+
+    overflow: hidden;
+
+    background: var(--purple);
+
+    border: 3px solid #a36fc1;
+
+    border-radius: 50%;
+
+    color: var(--cream);
+
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.05;
+
+    text-align: center;
+
+    word-break: break-word;
+
+    box-shadow:
+        inset 0 0 0 3px #100a26;
+}
+
+
+/* =========================================================
+   CAPSULE DETAIL
+   ========================================================= */
+
+.capsule-detail {
+    position: absolute;
+
+    bottom: 13px;
+    left: 50%;
+
+    width: 30px;
+    height: 5px;
+
+    transform:
+        translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -12px 0 0 var(--lavender),
+        12px 0 0 var(--lavender);
+}
+
+
+/* =========================================================
+   CAPSULE EXHAUST
+   ========================================================= */
+
+.capsule-exhaust {
+    position: absolute;
+
+    bottom: -22px;
+    left: 50%;
+
+    display: flex;
+
+    gap: 4px;
+
+    transform:
+        translateX(-50%);
+}
+
+.capsule-exhaust span {
+    width: 5px;
+    height: 13px;
+
+    background: var(--cream);
+
+    animation:
+        capsuleFlame 0.22s steps(2)
+        infinite alternate;
+}
+
+.capsule-exhaust span:nth-child(2) {
+    height: 20px;
+
+    animation-delay: 0.08s;
+}
+
+.capsule-exhaust span:nth-child(3) {
+    height: 10px;
+
+    animation-delay: 0.14s;
+}
+
+@keyframes capsuleFlame {
+
+    from {
+        transform:
+            scaleY(0.65);
+
+        opacity: 0.55;
+    }
+
+    to {
+        transform:
+            scaleY(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   CAPSULE MODE — TEXTAREA TRANSFORMATION
+   ========================================================= */
+
+.capsule-mode #wish-input {
+    width: 120px;
+    height: 120px;
+
+    padding: 0;
+
+    color: transparent;
+
+    background: var(--white);
+
+    border: 4px solid var(--purple);
+
+    border-radius: 50%;
+
+    box-shadow:
+        6px 6px 0 var(--purple),
+        inset 0 0 0 4px #e8dcae;
+
+    opacity: 1;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    transition:
+        width 1.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        height 1.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        padding 1.6s ease,
+        border-radius 1.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        background 1.2s ease,
+        border-color 1.2s ease,
+        box-shadow 1.6s ease,
+        color 0.5s ease;
+}
+
+
+/* Keep the real capsule hidden while the textarea transforms */
+
+.capsule-mode .capsule {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+}
+
+
+/* Reveal the real capsule after the textarea has transformed */
+
+.capsule-mode .capsule.ready {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+
+/* =========================================================
+   FOLDING SPARKS
+   ========================================================= */
+
+.capsule-mode .wish-box-wrapper::before,
+.capsule-mode .wish-box-wrapper::after {
+    content: "✦";
+
+    position: absolute;
+
+    color: var(--cream);
+
+    font-size: 20px;
+
+    opacity: 0;
+
+    animation:
+        foldingSpark 1s steps(3)
+        forwards;
+}
+
+.capsule-mode .wish-box-wrapper::before {
+    left: 35%;
+    top: 25%;
+}
+
+.capsule-mode .wish-box-wrapper::after {
+    right: 35%;
+    bottom: 25%;
+
+    animation-delay: 0.15s;
+}
+
+@keyframes foldingSpark {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(0.5);
+    }
+
+    40% {
+        opacity: 1;
+
+        transform:
+            scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(0.8);
+    }
+}
+
+
+/* =========================================================
+   LAUNCHING STATE
+   ========================================================= */
+
+.launching #send-button {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.launching .wish-area h2 {
+    opacity: 0;
+
+    transform:
+        translateY(-8px);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+
+/* =========================================================
+   CAPSULE FLIGHT
+   ========================================================= */
+
+.capsule.launch {
+    opacity: 1;
+
+    transition: none;
+
+    animation:
+        capsuleFlight 3.5s linear forwards;
+}
+
+@keyframes capsuleFlight {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    20% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--flight-x) * 0.20),
+                calc(var(--flight-y) * 0.20)
+            )
+            scale(0.86);
+
+        opacity: 1;
+    }
+
+    40% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--flight-x) * 0.40),
+                calc(var(--flight-y) * 0.40)
+            )
+            scale(0.72);
+
+        opacity: 1;
+    }
+
+    60% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--flight-x) * 0.60),
+                calc(var(--flight-y) * 0.60)
+            )
+            scale(0.58);
+
+        opacity: 1;
+    }
+
+    80% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--flight-x) * 0.80),
+                calc(var(--flight-y) * 0.80)
+            )
+            scale(0.42);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                var(--flight-x),
+                var(--flight-y)
+            )
+            scale(0.28);
+
+        opacity: 1;
+    }
+}
+
+.capsule-mode.launch-started #wish-input {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* =========================================================
+   ARRIVAL STAR
+   ========================================================= */
+
+.capsule.arrived {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    width: 120px;
+    height: 120px;
+
+    border: 0;
+
+    border-radius: 0;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.28);
+
+    animation: none;
+
+    transition: none;
+
+    overflow: visible;
+
+    z-index: 1000;
+}
+
+.capsule.arrived .capsule-window,
+.capsule.arrived .capsule-detail,
+.capsule.arrived .capsule-exhaust {
+    display: none;
+}
+
+
+/* =========================================================
+   YELLOW PIXEL STAR
+   ========================================================= */
+
+.capsule.arrived::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 10px;
+    height: 10px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.4);
+
+    background: var(--cream);
+
+    image-rendering: pixelated;
+
+    box-shadow:
+        0 -10px 0 var(--cream),
+        0 10px 0 var(--cream),
+        -10px 0 0 var(--cream),
+        10px 0 0 var(--cream),
+        -7px -7px 0 var(--cream),
+        7px -7px 0 var(--cream),
+        -7px 7px 0 var(--cream),
+        7px 7px 0 var(--cream),
+        0 0 10px var(--cream),
+        0 0 20px rgba(255, 220, 90, 0.9);
+
+    animation:
+        arrivalStarTwinkle 1.2s steps(4)
+        forwards;
+}
+
+.capsule.arrived::after {
+    content: "✦";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.5);
+
+    color: #fffde0;
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 4px #fff4bd,
+        0 0 10px #ffe66d,
+        0 0 18px #ffd84d;
+
+    animation:
+        arrivalGlint 1.2s steps(4)
+        forwards;
+}
+
+
+/* =========================================================
+   ARRIVAL STAR TWINKLE
+   ========================================================= */
+
+@keyframes arrivalStarTwinkle {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.3);
+
+        filter: brightness(1);
+    }
+
+    15% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.65);
+
+        filter: brightness(1.5);
+    }
+
+    30% {
+        opacity: 0.45;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.45);
+
+        filter: brightness(2);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.85);
+
+        filter: brightness(1.6);
+    }
+
+    70% {
+        opacity: 0.55;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.6);
+
+        filter: brightness(2);
+    }
+
+    85% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.9);
+
+        filter: brightness(1.8);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.15);
+
+        filter: brightness(3);
+    }
+}
+
+
+/* =========================================================
+   STAR GLINT
+   ========================================================= */
+
+@keyframes arrivalGlint {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.2);
+    }
+
+    20% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.8);
+    }
+
+    40% {
+        opacity: 0.35;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.45);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    80% {
+        opacity: 0.5;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.7);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.2);
+    }
+}
+
+
+/* =========================================================
+   SECOND SCENE — DEEP SPACE JOURNEY
+   ========================================================= */
+
+.journey-scene {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #09061d;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+.journey-scene.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   SECOND SCENE — SKY
+   ========================================================= */
+
+.journey-sky {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #21154b 0%,
+            #120c2d 42%,
+            #08051a 100%
+        );
+}
+
+
+/* =========================================================
+   SECOND SCENE — CRT SCANLINES
+   ========================================================= */
+
+.journey-scanlines {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: 0.5;
+}
+
+
+/* =========================================================
+   SECOND SCENE — STAR FIELD
+   ========================================================= */
+
+.journey-star-field {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SECOND SCENE — QUIET BACKGROUND STARS
+   ========================================================= */
+
+.journey-background-star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    background: var(--white);
+
+    image-rendering: pixelated;
+
+    opacity: 0.45;
+
+    animation:
+        quietStarTwinkle 3s steps(3)
+        infinite;
+}
+
+.journey-background-star.bright {
+    width: 3px;
+    height: 3px;
+
+    opacity: 0.7;
+}
+
+@keyframes quietStarTwinkle {
+
+    0% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 0.25;
+    }
+}
+
+
+/* =========================================================
+   SECOND SCENE — SHOOTING STARS
+   ========================================================= */
+
+.pixel-comet {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    background: var(--white);
+
+    image-rendering: pixelated;
+
+    animation:
+        shootingStar 4.5s linear 1 forwards;
+}
+
+.pixel-comet::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 4px;
+
+    background: var(--white);
+
+    box-shadow:
+        0 0 0 1px var(--cream),
+        0 0 6px rgba(255, 244, 189, 0.9);
+
+    image-rendering: pixelated;
+}
+
+.pixel-comet::after {
+    content: "";
+
+    position: absolute;
+
+    left: 4px;
+    top: 1px;
+
+    width: 32px;
+    height: 1px;
+
+    background: var(--cream);
+
+    box-shadow:
+        8px 0 0 rgba(255, 244, 189, 0.75),
+        16px 0 0 rgba(255, 244, 189, 0.45),
+        24px 0 0 rgba(255, 244, 189, 0.2);
+
+    image-rendering: pixelated;
+}
+
+
+/* =========================================================
+   SMALL SHOOTING STAR
+   ========================================================= */
+
+.pixel-comet.small {
+    width: 3px;
+    height: 3px;
+}
+
+.pixel-comet.small::before {
+    width: 3px;
+    height: 3px;
+
+    box-shadow:
+        0 0 0 1px var(--cream),
+        0 0 5px rgba(255, 244, 189, 0.8);
+}
+
+.pixel-comet.small::after {
+    left: 3px;
+    top: 1px;
+
+    width: 22px;
+    height: 1px;
+
+    box-shadow:
+        6px 0 0 rgba(255, 244, 189, 0.7),
+        12px 0 0 rgba(255, 244, 189, 0.45),
+        18px 0 0 rgba(255, 244, 189, 0.2);
+}
+
+
+/* =========================================================
+   LARGE SHOOTING STAR
+   ========================================================= */
+
+.pixel-comet.large {
+    width: 5px;
+    height: 5px;
+}
+
+.pixel-comet.large::before {
+    width: 5px;
+    height: 5px;
+
+    box-shadow:
+        0 0 0 1px var(--cream),
+        0 0 8px rgba(255, 244, 189, 1);
+}
+
+.pixel-comet.large::after {
+    left: 5px;
+    top: 2px;
+
+    width: 42px;
+    height: 2px;
+
+    background: var(--cream);
+
+    box-shadow:
+        10px 0 0 rgba(255, 244, 189, 0.75),
+        20px 0 0 rgba(255, 244, 189, 0.55),
+        30px 0 0 rgba(255, 244, 189, 0.3),
+        38px 0 0 rgba(255, 244, 189, 0.15);
+}
+
+
+/* =========================================================
+   SHOOTING STAR MOVEMENT
+   ========================================================= */
+
+@keyframes shootingStar {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            );
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform:
+            translate3d(
+                -350px,
+                250px,
+                0
+            );
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   SECOND SCENE — CONTENT
+   ========================================================= */
+
+.journey-content {
+    position: relative;
+
+    z-index: 4;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE
+   ========================================================= */
+
+.journey-capsule {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 120px;
+    height: 120px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    opacity: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 4px solid var(--purple);
+
+    border-radius: 50%;
+
+    box-shadow:
+        6px 6px 0 var(--purple),
+        inset 0 0 0 4px #e8dcae;
+
+    image-rendering: pixelated;
+
+    overflow: visible;
+
+    transition:
+        opacity 1s ease;
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE TOP
+   ========================================================= */
+
+.journey-capsule::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+    left: 50%;
+
+    width: 36px;
+    height: 6px;
+
+    transform:
+        translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -10px 6px 0 var(--lavender),
+        10px 6px 0 var(--lavender);
+
+    image-rendering: pixelated;
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE WINDOW
+   ========================================================= */
+
+.journey-capsule-window {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+
+    overflow: hidden;
+
+    background: var(--purple);
+
+    border: 3px solid #a36fc1;
+
+    border-radius: 50%;
+
+    color: var(--cream);
+
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.05;
+
+    text-align: center;
+
+    word-break: break-word;
+
+    box-shadow:
+        inset 0 0 0 3px #100a26;
+}
+
+.journey-capsule-window span {
+    display: block;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    overflow: hidden;
+
+    color: var(--cream);
+
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.05;
+
+    text-align: center;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE DETAIL
+   ========================================================= */
+
+.journey-capsule-detail {
+    position: absolute;
+
+    bottom: 13px;
+    left: 50%;
+
+    width: 30px;
+    height: 5px;
+
+    transform:
+        translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -12px 0 0 var(--lavender),
+        12px 0 0 var(--lavender);
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE EXHAUST
+   ========================================================= */
+
+.journey-capsule-exhaust {
+    position: absolute;
+
+    bottom: -22px;
+    left: 50%;
+
+    display: flex;
+
+    gap: 4px;
+
+    transform:
+        translateX(-50%);
+}
+
+.journey-capsule-exhaust span {
+    width: 5px;
+    height: 13px;
+
+    background: var(--cream);
+
+    animation:
+        journeyCapsuleFlame 0.22s steps(2)
+        infinite alternate;
+}
+
+.journey-capsule-exhaust span:nth-child(2) {
+    height: 20px;
+
+    animation-delay: 0.08s;
+}
+
+.journey-capsule-exhaust span:nth-child(3) {
+    height: 10px;
+
+    animation-delay: 0.14s;
+}
+
+@keyframes journeyCapsuleFlame {
+
+    from {
+        transform:
+            scaleY(0.65);
+
+        opacity: 0.55;
+    }
+
+    to {
+        transform:
+            scaleY(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   SECOND SCENE — CAPSULE FLOAT
+   ========================================================= */
+
+.journey-capsule.drifting {
+    opacity: 1;
+
+    animation:
+        journeyCapsuleDrift 4s ease-in-out infinite;
+}
+
+@keyframes journeyCapsuleDrift {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-10px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   SECOND SCENE — JOURNEY TEXT
+   ========================================================= */
+
+.journey-text {
+    position: absolute;
+
+    left: 50%;
+    bottom: 12%;
+
+    transform:
+        translateX(-50%)
+        translateY(10px);
+
+    width: 90%;
+
+    margin: 0;
+
+    text-align: center;
+
+    color: var(--cream);
+
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size: 26px;
+
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    text-shadow:
+        2px 2px 0 #21133f;
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+.journey-text.visible {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =========================================================
+   HIDE LANDING PAGE DURING SECOND SCENE
+   ========================================================= */
+
+body.showing-journey .landing-page {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   MOBILE — LANDING PAGE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .content {
+        width: 94%;
+
+        padding: 40px 12px;
+    }
+
+    .jupiter-divider {
+        gap: 12px;
+
+        margin-bottom: 20px;
+    }
+
+    .jupiter-icon {
+        width: 68px;
+        height: 68px;
+    }
+
+    .jupiter-planet {
+        width: 50px;
+        height: 50px;
+    }
+
+    .jupiter-ring {
+        width: 72px;
+        height: 22px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+
+        letter-spacing: 1px;
+    }
+
+    .intro {
+        font-size: 20px;
+    }
+
+    .wish-area {
+        margin-top: 38px;
+    }
+
+    .wish-area h2 {
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    .wish-box-wrapper {
+        height: 160px;
+    }
+
+    #wish-input {
+        height: 135px;
+
+        font-size: 21px;
+    }
+
+    #send-button {
+        max-width: 95%;
+
+        padding: 16px 18px;
+
+        font-size: 10px;
+    }
+
+    .capsule {
+        width: 105px;
+        height: 105px;
+    }
+
+    .capsule-window {
+        width: 60px;
+        height: 60px;
+
+        font-size: 14px;
+    }
+
+    .capsule.arrived {
+        width: 38px;
+        height: 38px;
+    }
+
+    .capsule.arrived::before {
+        width: 38px;
+        height: 38px;
+    }
+
+    .journey-star.large {
+        width: 4px;
+        height: 4px;
+
+        box-shadow:
+            0 -4px 0 var(--white),
+            0 4px 0 var(--white),
+            -4px 0 0 var(--white),
+            4px 0 0 var(--white);
+    }
+}
+
+
+/* =========================================================
+   MOBILE — SECOND JOURNEY SCENE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .journey-capsule {
+        width: 105px;
+        height: 105px;
+    }
+
+    .journey-capsule-window {
+        width: 60px;
+        height: 60px;
+
+        padding: 7px;
+    }
+
+    .journey-capsule-window span {
+        font-size: 14px;
+    }
+
+    .journey-capsule-detail {
+        bottom: 12px;
+
+        width: 27px;
+        height: 5px;
+    }
+
+    .journey-capsule-exhaust {
+        bottom: -20px;
+    }
+
+    .journey-text {
+        width: 90%;
+
+        bottom: 13%;
+
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================================
+   PAGE 3 — JUPITER'S FINAL SCENE
+   ========================================================= */
+
+.final-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+
+    overflow: hidden;
+
+    background: #08051a;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+.final-scene.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.final-sky {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            #21154b 0%,
+            #120c2d 48%,
+            #08051a 100%
+        );
+}
+
+/* Background stars */
+
+.final-star-field {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.final-background-star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    background: #fff9e8;
+
+    box-shadow: 0 0 5px rgba(255, 244, 189, 0.6);
+
+    animation: finalStarTwinkle 3s steps(3) infinite;
+}
+
+@keyframes finalStarTwinkle {
+    0%, 100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* Jupiter positioning and glow */
+
+.final-jupiter {
+    position: absolute;
+
+    top: 43%;
+    left: 50%;
+
+    width: min(60vw, 60vh);
+    aspect-ratio: 1;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    image-rendering: pixelated;
+}
+
+.final-jupiter-glow {
+    position: absolute;
+    inset: -36%;
+
+    border-radius: 50%;
+
+    background: rgba(220, 167, 243, 0.12);
+
+    filter: blur(30px);
+}
+
+.final-jupiter-planet {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    border: 4px solid #3b245b;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f4d9a4 0%,
+            #d4a16d 16%,
+            #f0c58b 28%,
+            #a96551 40%,
+            #e9bd83 52%,
+            #bd805c 64%,
+            #f0d09b 78%,
+            #b66e55 100%
+        );
+
+    box-shadow:
+        8px 8px 0 rgba(0, 0, 0, 0.25),
+        inset -18px -8px 0 rgba(55, 27, 62, 0.15);
+}
+
+.final-jupiter-band {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+}
+
+.final-band-1 {
+    top: 19%;
+    height: 10%;
+    background: #f8e5b8;
+}
+
+.final-band-2 {
+    top: 38%;
+    height: 13%;
+    background: #a96752;
+}
+
+.final-band-3 {
+    top: 59%;
+    height: 11%;
+    background: #efd09b;
+}
+
+.final-band-4 {
+    top: 79%;
+    height: 8%;
+    background: #c18461;
+}
+
+.final-jupiter-storm {
+    display: none;
+}
+
+/* Page 3 comets */
+
+.final-comet-field {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.final-comet {
+    position: absolute;
+
+    top: -40px;
+
+    width: 5px;
+    height: 5px;
+
+    opacity: 0;
+
+    background: #fff4bd;
+
+    box-shadow:
+        0 0 5px rgba(255, 244, 189, 0.9),
+        0 0 12px rgba(255, 220, 120, 0.5);
+
+    image-rendering: pixelated;
+}
+
+.final-comet::after {
+    content: "";
+
+    position: absolute;
+
+    top: 2px;
+    right: 3px;
+
+    width: 42px;
+    height: 2px;
+
+    background: linear-gradient(
+        to left,
+        rgba(255, 244, 189, 0.9),
+        rgba(255, 244, 189, 0)
+    );
+
+    transform: rotate(-35deg);
+    transform-origin: right center;
+}
+
+.final-comet.falling {
+    animation: finalCometFall 2.4s linear forwards;
+}
+
+@keyframes finalCometFall {
+    0% {
+        top: -40px;
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 110%;
+        opacity: 0;
+        transform: translateX(-65vw);
+    }
+}
+
+/* Capsule arrival star */
+
+/* Capsule arrival glow — Page 3 only */
+
+.final-arrival-star {
+    filter: drop-shadow(0 0 8px #fff4bd);
+}
+
+.final-arrival-star.twinkle {
+    filter:
+        drop-shadow(0 0 15px #fff4bd)
+        drop-shadow(0 0 30px rgba(255, 220, 100, 0.9));
+}
+
+.final-arrival-star {
+    position: absolute;
+
+    z-index: 6;
+
+    left: 50%;
+    top: 43%;
+
+    width: 8px;
+    height: 8px;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+    pointer-events: none;
+
+    background: #fff4bd;
+
+    image-rendering: pixelated;
+}
+
+.final-arrival-star.twinkle {
+    animation: finalArrivalTwinkle 1.8s steps(4) forwards;
+}
+
+@keyframes finalArrivalTwinkle {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.8);
+        box-shadow:
+            0 0 8px #fff4bd,
+            0 0 20px rgba(255, 220, 100, 0.9);
+    }
+
+    55% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+}
+
+/* Centered messages */
+
+.final-message-container {
+    position: absolute;
+
+    z-index: 8;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(850px, 86%);
+
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+.final-message {
+    margin: 0;
+
+    color: #e8e2d5;
+
+    font-family: "VT323", monospace;
+    font-size: clamp(28px, 3.5vw, 42px);
+
+    line-height: 1.5;
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    text-shadow:
+
+        2px 2px 0 #000000,
+        -2px 2px 0 #000000,
+        2px -2px 0 #000000,
+        -2px -2px 0 #000000,
+        4px 4px 0 #21133f;
+
+    transition: opacity 0.6s ease;
+}
+
+.final-message.visible {
+    opacity: 1;
+}
+
+/* Mobile layout for Page 3 */
+
+@media (max-width: 600px) {
+    .final-jupiter {
+        top: 38%;
+        width: 60vw;
+    }
+
+
+
+    .final-capsule-window {
+        width: 60px;
+        height: 60px;
+        padding: 7px;
+    }
+
+    .final-message-container {
+        top: 50%;
+        width: 88%;
+    }
+
+    .final-message {
+        font-size: 24px;
+        line-height: 1.45;
+    }
+}
+
+/* =========================================================
+   PAGE 3 — FINAL CAPSULE
+   ========================================================= */
+
+.final-capsule {
+    position: absolute;
+    z-index: 10;
+
+    left: -140px;
+    bottom: 17%;
+
+    width: 120px;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 4px solid var(--purple);
+    border-radius: 50%;
+
+    box-shadow:
+        6px 6px 0 var(--purple),
+        inset 0 0 0 4px #e8dcae;
+
+    image-rendering: pixelated;
+    overflow: visible;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+/* Capsule top detail */
+.final-capsule::before {
+    content: "";
+
+    position: absolute;
+    top: 8px;
+    left: 50%;
+
+    width: 36px;
+    height: 6px;
+
+    transform: translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -10px 6px 0 var(--lavender),
+        10px 6px 0 var(--lavender);
+}
+
+/* Capsule window */
+.final-capsule-window {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+    overflow: hidden;
+
+    background: var(--purple);
+
+    border: 3px solid #a36fc1;
+    border-radius: 50%;
+
+    box-shadow: inset 0 0 0 3px #100a26;
+
+    text-align: center;
+}
+
+.final-capsule-window span {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+
+    overflow: hidden;
+
+    color: var(--cream);
+    font-family: "VT323", monospace;
+    font-size: 15px;
+    line-height: 1.05;
+
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* Capsule detail */
+.final-capsule-detail {
+    position: absolute;
+
+    bottom: 13px;
+    left: 50%;
+
+    width: 30px;
+    height: 5px;
+
+    transform: translateX(-50%);
+
+    background: var(--lavender);
+
+    box-shadow:
+        -12px 0 0 var(--lavender),
+        12px 0 0 var(--lavender);
+}
+
+/* Capsule exhaust */
+.final-capsule-exhaust {
+    position: absolute;
+
+    bottom: -22px;
+    left: 50%;
+
+    display: flex;
+    gap: 4px;
+
+    transform: translateX(-50%);
+}
+
+.final-capsule-exhaust span {
+    width: 5px;
+    height: 13px;
+
+    background: var(--cream);
+
+    animation: finalCapsuleFlame 0.22s steps(2)
+        infinite alternate;
+}
+
+.final-capsule-exhaust span:nth-child(2) {
+    height: 20px;
+    animation-delay: 0.08s;
+}
+
+.final-capsule-exhaust span:nth-child(3) {
+    height: 10px;
+    animation-delay: 0.14s;
+}
+
+@keyframes finalCapsuleFlame {
+    from {
+        transform: scaleY(0.65);
+        opacity: 0.55;
+    }
+
+    to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+/* Flight toward Jupiter */
+.final-capsule.flying {
+    animation: finalCapsuleFlight 4s ease-in-out forwards;
+}
+
+@keyframes finalCapsuleFlight {
+    0% {
+        transform: translate(0, 0) rotate(-12deg) scale(1);
+        opacity: 1;
+    }
+
+    65% {
+        transform:
+            translate(
+                calc(var(--final-flight-x) * 0.65),
+                calc(var(--final-flight-y) * 0.65)
+            )
+            rotate(5deg)
+            scale(0.8);
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(
+                var(--final-flight-x),
+                var(--final-flight-y)
+            )
+            rotate(0deg)
+            scale(0.45);
+        opacity: 0;
+    }
+}
+
+/* Smaller capsule on mobile */
+@media (max-width: 600px) {
+    .final-capsule {
+        width: 105px;
+        height: 105px;
+    }
+    .final-capsule-window {
+        width: 60px;
+        height: 60px;
+        padding: 7px;
+    }
+}
+
+/* =========================================================
+   PAGE 3 — BIRTHDAY MAGIC
+   Activates when Happy Birthday appears
+   ========================================================= */
+
+/* Keep birthday effects hidden until the reveal */
+
+.birthday-rings,
+.birthday-particles,
+.birthday-constellation {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease;
+}
+
+/* Activate the magical effects */
+
+.final-jupiter.birthday-magic .birthday-rings,
+.final-jupiter.birthday-magic .birthday-particles,
+.final-jupiter.birthday-magic .birthday-constellation {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   GLOWING ORBITAL RINGS
+   ========================================================= */
+
+.birthday-rings {
+    position: absolute;
+    inset: -38%;
+    z-index: 3;
+    border-radius: 50%;
+}
+
+.birthday-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 100%;
+    height: 38%;
+
+    border: 2px solid rgba(220, 167, 243, 0.65);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(220, 167, 243, 0.65),
+        0 0 20px rgba(220, 167, 243, 0.3);
+
+    transform: translate(-50%, -50%) rotate(-25deg);
+}
+
+.birthday-ring-one {
+    animation: birthdayRingOne 12s linear infinite;
+}
+
+.birthday-ring-two {
+    width: 90%;
+    height: 55%;
+
+    border-color: rgba(255, 244, 189, 0.55);
+
+    box-shadow:
+        0 0 8px rgba(255, 244, 189, 0.55),
+        0 0 18px rgba(255, 244, 189, 0.25);
+
+    animation: birthdayRingTwo 16s linear infinite;
+}
+
+.birthday-ring-three {
+    width: 110%;
+    height: 65%;
+
+    border-color: rgba(186, 151, 255, 0.45);
+
+    box-shadow:
+        0 0 10px rgba(186, 151, 255, 0.5);
+
+    animation: birthdayRingThree 20s linear infinite;
+}
+
+@keyframes birthdayRingOne {
+    from {
+        transform: translate(-50%, -50%) rotate(-25deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(335deg);
+    }
+}
+
+@keyframes birthdayRingTwo {
+    from {
+        transform: translate(-50%, -50%) rotate(55deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-305deg);
+    }
+}
+
+@keyframes birthdayRingThree {
+    from {
+        transform: translate(-50%, -50%) rotate(15deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(375deg);
+    }
+}
+
+
+/* =========================================================
+   SWIRLING STARDUST PARTICLES
+   ========================================================= */
+
+.birthday-particles {
+    position: absolute;
+    inset: -35%;
+    z-index: 4;
+    border-radius: 50%;
+}
+
+.birthday-particles span {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #fff4bd;
+
+    box-shadow:
+        0 0 6px #fff4bd,
+        0 0 14px rgba(255, 220, 120, 0.9),
+        0 0 24px rgba(220, 167, 243, 0.6);
+
+    opacity: 0;
+
+    animation: birthdayParticleOrbit 7s linear infinite;
+}
+
+.birthday-particles span:nth-child(1) {
+    --orbit-size: 110px;
+    --orbit-height: 55px;
+    animation-delay: 0s;
+}
+
+.birthday-particles span:nth-child(2) {
+    --orbit-size: 135px;
+    --orbit-height: 70px;
+    animation-delay: -1s;
+}
+
+.birthday-particles span:nth-child(3) {
+    --orbit-size: 160px;
+    --orbit-height: 80px;
+    animation-delay: -2s;
+}
+
+.birthday-particles span:nth-child(4) {
+    --orbit-size: 185px;
+    --orbit-height: 95px;
+    animation-delay: -3s;
+}
+
+.birthday-particles span:nth-child(5) {
+    --orbit-size: 120px;
+    --orbit-height: 110px;
+    animation-delay: -4s;
+}
+
+.birthday-particles span:nth-child(6) {
+    --orbit-size: 150px;
+    --orbit-height: 125px;
+    animation-delay: -5s;
+}
+
+.birthday-particles span:nth-child(7) {
+    --orbit-size: 180px;
+    --orbit-height: 140px;
+    animation-delay: -6s;
+}
+
+.birthday-particles span:nth-child(8) {
+    --orbit-size: 205px;
+    --orbit-height: 100px;
+    animation-delay: -2.5s;
+}
+
+.birthday-particles span:nth-child(9) {
+    --orbit-size: 100px;
+    --orbit-height: 85px;
+    animation-delay: -3.5s;
+}
+
+.birthday-particles span:nth-child(10) {
+    --orbit-size: 170px;
+    --orbit-height: 65px;
+    animation-delay: -4.5s;
+}
+
+.birthday-particles span:nth-child(11) {
+    --orbit-size: 195px;
+    --orbit-height: 120px;
+    animation-delay: -5.5s;
+}
+
+.birthday-particles span:nth-child(12) {
+    --orbit-size: 140px;
+    --orbit-height: 145px;
+    animation-delay: -1.5s;
+}
+
+@keyframes birthdayParticleOrbit {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(0deg)
+            translateX(var(--orbit-size)) scale(0.5);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) rotate(180deg)
+            translateX(var(--orbit-size)) scale(1.2);
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(360deg)
+            translateX(var(--orbit-size)) scale(0.5);
+    }
+}
+
+
+/* =========================================================
+   CONSTELLATION STARS
+   ========================================================= */
+
+.birthday-constellation {
+    position: absolute;
+    inset: -48%;
+    z-index: 5;
+}
+
+.constellation-star {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    background: #fff9e8;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px #fff9e8,
+        0 0 18px #dca7f3;
+
+    animation: constellationTwinkle 2.5s ease-in-out infinite;
+}
+
+.star-one {
+    left: 18%;
+    top: 38%;
+}
+
+.star-two {
+    left: 38%;
+    top: 18%;
+    animation-delay: 0.4s;
+}
+
+.star-three {
+    left: 62%;
+    top: 25%;
+    animation-delay: 0.8s;
+}
+
+.star-four {
+    left: 82%;
+    top: 45%;
+    animation-delay: 1.2s;
+}
+
+.star-five {
+    left: 55%;
+    top: 78%;
+    animation-delay: 1.6s;
+}
+
+
+/* Lines connecting the constellation stars */
+
+.constellation-line {
+    position: absolute;
+
+    height: 1px;
+
+    transform-origin: left center;
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 244, 189, 0.05),
+        rgba(220, 167, 243, 0.8),
+        rgba(255, 244, 189, 0.05)
+    );
+
+    box-shadow: 0 0 5px rgba(220, 167, 243, 0.5);
+}
+
+.line-one {
+    left: 19%;
+    top: 39%;
+    width: 30%;
+    transform: rotate(-43deg);
+}
+
+.line-two {
+    left: 39%;
+    top: 19%;
+    width: 25%;
+    transform: rotate(15deg);
+}
+
+.line-three {
+    left: 63%;
+    top: 26%;
+    width: 29%;
+    transform: rotate(37deg);
+}
+
+.line-four {
+    left: 82%;
+    top: 46%;
+    width: 42%;
+    transform: rotate(125deg);
+}
+
+@keyframes constellationTwinkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+
+/* =========================================================
+   MOBILE — BIRTHDAY MAGIC
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .birthday-rings {
+        inset: -45%;
+    }
+
+    .birthday-particles {
+        inset: -40%;
+    }
+
+    .birthday-constellation {
+        inset: -50%;
+    }
+
+    .birthday-particles span {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* =========================================================
+   BIRTHDAY ENDING — FADE INTO DARKNESS
+   ========================================================= */
+
+.final-scene.fading-out {
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 3s ease;
+}
+
+/* =========================================================
+   PAGE 2 — MARS AND SATURN ENCOUNTERS
+   ========================================================= */
+
+.planet-encounter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+}
+
+/* -------------------------
+   MARS
+   ------------------------- */
+
+.mars-encounter {
+    width: 760px;
+    height: 760px;
+}
+
+.mars-planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 600px;
+    height: 600px;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle at 30% 28%,
+            #ffc078 0%,
+            #ff7138 25%,
+            #e84424 55%,
+            #a82120 80%,
+            #60151f 100%
+        );
+
+    box-shadow:
+        inset -12px -8px 0 rgba(65, 12, 25, 0.3),
+        0 0 22px rgba(238, 78, 49, 0.25);
+}
+
+/* Mars surface markings */
+
+.mars-planet::before {
+    content: "";
+
+    position: absolute;
+    top: 24%;
+    left: 20%;
+
+    width: 20px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: rgba(111, 31, 29, 0.5);
+
+    box-shadow:
+        28px 24px 0 -3px rgba(111, 31, 29, 0.5),
+        8px 43px 0 -5px rgba(255, 170, 104, 0.7);
+}
+
+.mars-planet::after {
+    content: "";
+
+    position: absolute;
+    top: 18%;
+    left: 58%;
+
+    width: 12px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 190, 132, 0.65);
+}
+
+/* Mars' two moons */
+
+.mars-moon {
+    position: absolute;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background: #b9a79d;
+
+    box-shadow:
+        inset -8px -6px 0 rgba(45, 35, 48, 0.4),
+        0 0 8px rgba(230, 218, 210, 0.3);
+}
+
+.mars-moon-one {
+    top: 28px;
+    right: 10px;
+
+    animation: marsMoonOrbitOne 4s linear infinite;
+}
+
+.mars-moon-two {
+    bottom: 23px;
+    left: 7px;
+
+    width: 36px;
+    height: 36px;
+
+    background: #d0bfb1;
+
+    animation: marsMoonOrbitTwo 5s linear infinite;
+}
+
+@keyframes marsMoonOrbitOne {
+    0% {
+        transform: rotate(0deg) translateX(15px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(15px) rotate(-360deg);
+    }
+}
+
+@keyframes marsMoonOrbitTwo {
+    0% {
+        transform: rotate(0deg) translateX(12px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg) translateX(12px) rotate(360deg);
+    }
+}
+
+/* Mars approaches, passes the capsule, and disappears */
+
+/* Mars slowly drifts from right to left past the capsule */
+/* Mars slowly passes the capsule from right to left */
+.journey-scene.active .mars-encounter {
+    animation: marsPassage 12s linear 9s both;
+}
+
+@keyframes marsPassage {
+    0% {
+        opacity: 0;
+        transform: translate(100vw, -50%) scale(0.8);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(60vw, -50%) scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    88% {
+        opacity: 1;
+        transform: translate(-160vw, -50%) scale(0.9);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-200vw, -50%) scale(0.8);
+    }
+}
+
+/* -------------------------
+   SATURN
+   ------------------------- */
+
+.saturn-encounter {
+    width: 1600px;
+    height: 1200px;
+}
+
+.saturn-planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 340px;
+    height: 240px;
+
+    transform: translate(-50%, -50%);
+    isolation: isolate;
+}
+
+.saturn-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 960px;
+    height: 960px;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle at 32% 27%,
+            #fff0ba 0%,
+            #e9c77f 30%,
+            #c99a56 70%,
+            #795032 100%
+        );
+
+    box-shadow:
+        inset -10px -5px 0 rgba(80, 49, 29, 0.2),
+        0 0 18px rgba(255, 210, 130, 0.15);
+
+    z-index: 2;
+}
+
+/* =========================================================
+   SATURN'S GOLDEN RINGS — BACK AND FRONT LAYERS
+   ========================================================= */
+
+.saturn-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 2800px;
+    height: 700px;
+
+    border-radius: 50%;
+
+background:
+    radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        transparent 34%,
+
+        /* Ring 1 — inner band */
+        rgba(173, 126, 69, 0.2) 36%,
+        rgba(255, 230, 174, 0.9) 38%,
+        rgba(205, 160, 98, 0.75) 40%,
+        transparent 42%,
+
+        /* Gap between rings */
+        transparent 44%,
+
+        /* Ring 2 — middle band */
+        rgba(166, 119, 65, 0.25) 46%,
+        rgba(255, 239, 197, 0.95) 48%,
+        rgba(205, 160, 98, 0.8) 50%,
+        transparent 52%,
+
+        /* Gap between rings */
+        transparent 54%,
+
+        /* Ring 3 — outer band */
+        rgba(173, 126, 69, 0.2) 56%,
+        rgba(255, 230, 174, 0.85) 58%,
+        rgba(166, 119, 65, 0.5) 60%,
+        transparent 62%,
+
+        transparent 100%
+    );
+
+    transform: translate(-50%, -50%) rotate(-18deg);
+
+    pointer-events: none;
+}
+
+/* Back of the rings: behind Saturn */
+
+.saturn-rings-back {
+    z-index: 1;
+
+    clip-path: inset(0 0 50% 0);
+}
+
+/* Saturn's body remains in the middle */
+
+.saturn-body {
+    z-index: 2;
+}
+
+/* Front of the rings: in front of Saturn */
+
+.saturn-rings-front {
+    z-index: 3;
+
+    clip-path: inset(50% 0 0 0);
+}
+
+/* Saturn's rings flash as the capsule passes */
+
+.saturn-encounter .saturn-rings {
+    animation: none;
+}
+
+.journey-scene.active .saturn-encounter .saturn-rings {
+    animation: saturnRingFlash 0.9s ease-out 20s both;
+}
+
+/* Saturn slowly drifts from right to left past the capsule */
+/* Saturn slowly passes the capsule from right to left */
+.journey-scene.active .saturn-encounter {
+    animation: saturnPassage 12s linear 18s both;
+}
+
+@keyframes saturnPassage {
+    0% {
+        opacity: 0;
+        transform: translate(100vw, -50%) scale(0.7);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(60vw, -50%) scale(0.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    88% {
+        opacity: 1;
+        transform: translate(-160vw, -50%) scale(0.9);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-200vw, -50%) scale(0.8);
+    }
+}
+
+@keyframes saturnRingFlash {
+    0% {
+        filter: brightness(1.25);
+        box-shadow: 0 0 8px rgba(255, 226, 170, 0.3);
+    }
+
+    35% {
+        filter: brightness(2.5);
+        box-shadow:
+            0 0 12px #fff0ba,
+            0 0 28px #ffd88a,
+            0 0 45px rgba(255, 221, 160, 0.8);
+    }
+
+    65% {
+        filter: brightness(2);
+        box-shadow:
+            0 0 10px #fff0ba,
+            0 0 22px #ffd88a;
+    }
+
+    100% {
+        filter: brightness(1);
+        box-shadow: 0 0 5px rgba(255, 221, 160, 0.2);
+    }
+}
+
+/* Smaller planets on mobile */
+
+@media (max-width: 600px) {
+    .mars-encounter {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .saturn-encounter {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* =====================================================
+   WISH UPON JUPITER — TESTIMONIALS PAGES
+   Added styles only. Existing animations remain untouched.
+   ===================================================== */
+
+.testimonials-page {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: var(--white, #fff9e8);
+    background:
+        radial-gradient(ellipse at 50% 0%, #39205f 0%, transparent 55%),
+        linear-gradient(160deg, #17102f 0%, #21133f 55%, #100b23 100%);
+    font-family: "VT323", monospace;
+    position: relative;
+}
+
+.testimonials-page *,
+.testimonials-page *::before,
+.testimonials-page *::after {
+    box-sizing: border-box;
+}
+
+.testimonials-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.testimonial-star {
+    position: absolute;
+    color: var(--cream, #fff4bd);
+    opacity: 0.65;
+    animation: testimonialTwinkle 3s ease-in-out infinite alternate;
+}
+
+.testimonial-star.star-one {
+    top: 10%;
+    left: 9%;
+    font-size: 24px;
+}
+
+.testimonial-star.star-two {
+    top: 24%;
+    right: 12%;
+    font-size: 30px;
+    animation-delay: 0.7s;
+}
+
+.testimonial-star.star-three {
+    top: 52%;
+    left: 5%;
+    font-size: 20px;
+    animation-delay: 1.2s;
+}
+
+.testimonial-star.star-four {
+    top: 72%;
+    right: 8%;
+    font-size: 26px;
+    animation-delay: 0.4s;
+}
+
+.testimonial-star.star-five {
+    top: 88%;
+    left: 23%;
+    font-size: 18px;
+    animation-delay: 1.5s;
+}
+
+.testimonial-star.star-six {
+    top: 43%;
+    right: 27%;
+    font-size: 16px;
+    animation-delay: 0.9s;
+}
+
+@keyframes testimonialTwinkle {
+    from {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+/* Main page containers */
+
+.testimonials-container,
+.testimonial-form-container {
+    position: relative;
+    z-index: 1;
+    width: min(1100px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 55px 0 35px;
+}
+
+.testimonial-form-container {
+    width: min(720px, calc(100% - 36px));
+}
+
+
+/* Page heading */
+
+.testimonials-header {
+    text-align: center;
+    margin: 0 auto 42px;
+}
+
+.testimonials-emblem {
+    margin-bottom: 18px;
+    color: var(--cream, #fff4bd);
+    font-size: 34px;
+    text-shadow: 0 0 20px rgba(220, 167, 243, 0.7);
+}
+
+.testimonials-eyebrow {
+    margin: 0 0 14px;
+    color: var(--lavender, #dca7f3);
+    font-size: 19px;
+    letter-spacing: 4px;
+}
+
+.testimonials-header h1 {
+    margin: 0 0 20px;
+    color: var(--cream, #fff4bd);
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(19px, 4vw, 34px);
+    line-height: 1.8;
+    text-shadow: 0 0 24px rgba(220, 167, 243, 0.3);
+}
+
+.testimonials-intro {
+    margin: 0;
+    color: var(--white, #fff9e8);
+    font-size: 25px;
+    line-height: 1.5;
+}
+
+
+/* Testimonial card grid */
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+.testimonial-card {
+    position: relative;
+    min-width: 0;
+    padding: 26px;
+    overflow-wrap: anywhere;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(75, 48, 112, 0.88),
+            rgba(31, 20, 61, 0.96)
+        );
+    border: 1px solid rgba(220, 167, 243, 0.48);
+    border-radius: 18px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.2),
+        inset 0 0 22px rgba(220, 167, 243, 0.04);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cream, #fff4bd);
+    box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(220, 167, 243, 0.12);
+}
+
+.testimonial-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.testimonial-orbit {
+    color: var(--lavender, #dca7f3);
+    font-size: 27px;
+}
+
+.testimonial-rating {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    font-size: 24px;
+}
+
+.star-filled {
+    color: var(--cream, #fff4bd);
+    text-shadow: 0 0 10px rgba(255, 244, 189, 0.3);
+}
+
+.star-empty {
+    color: rgba(255, 249, 232, 0.35);
+}
+
+.testimonial-title {
+    margin: 0 0 14px;
+    color: var(--cream, #fff4bd);
+    font-size: 28px;
+    line-height: 1.3;
+}
+
+.testimonial-message {
+    margin: 0;
+    color: var(--white, #fff9e8);
+    font-size: 23px;
+    line-height: 1.55;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.testimonial-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 15px;
+    color: var(--lavender, #dca7f3);
+}
+
+.testimonial-divider::before,
+.testimonial-divider::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: rgba(220, 167, 243, 0.3);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cream, #fff4bd);
+    font-size: 22px;
+}
+
+.testimonial-author-icon {
+    font-size: 25px;
+}
+
+
+/* Empty state */
+
+.testimonials-empty {
+    grid-column: 1 / -1;
+    padding: 45px 22px;
+    text-align: center;
+    background: rgba(33, 19, 63, 0.7);
+    border: 1px dashed rgba(220, 167, 243, 0.55);
+    border-radius: 18px;
+}
+
+.empty-moon {
+    margin-bottom: 15px;
+    color: var(--cream, #fff4bd);
+    font-size: 55px;
+}
+
+.testimonials-empty h2 {
+    color: var(--cream, #fff4bd);
+    font-size: 28px;
+}
+
+.testimonials-empty p {
+    margin-bottom: 25px;
+    font-size: 23px;
+    line-height: 1.5;
+}
+
+
+/* Navigation buttons */
+
+.testimonials-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 40px 0 30px;
+}
+
+.testimonial-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 13px 20px;
+    border: 1px solid var(--lavender, #dca7f3);
+    border-radius: 10px;
+    background: linear-gradient(135deg, #70448e, #422760);
+    color: var(--white, #fff9e8);
+    font-family: "VT323", monospace;
+    font-size: 22px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.testimonial-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #8756a8, #523176);
+    box-shadow: 0 0 20px rgba(220, 167, 243, 0.22);
+}
+
+.testimonial-button.secondary {
+    background: rgba(33, 19, 63, 0.7);
+}
+
+.testimonial-button:focus-visible {
+    outline: 3px solid var(--cream, #fff4bd);
+    outline-offset: 4px;
+}
+
+
+/* Submission form */
+
+.testimonial-form {
+    padding: 30px;
+    background: rgba(33, 19, 63, 0.86);
+    border: 1px solid rgba(220, 167, 243, 0.48);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+}
+
+.testimonial-form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0 0 25px;
+    padding: 0;
+    border: 0;
+}
+
+.testimonial-form-group > label,
+.rating-group legend {
+    margin-bottom: 10px;
+    color: var(--cream, #fff4bd);
+    font-size: 23px;
+}
+
+.optional-label,
+.required-label {
+    color: var(--lavender, #dca7f3);
+    font-size: 18px;
+}
+
+.testimonial-form input[type="text"],
+.testimonial-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(220, 167, 243, 0.48);
+    border-radius: 9px;
+    outline: none;
+    background: var(--input-bg, rgba(35, 30, 86, 0.88));
+    color: var(--white, #fff9e8);
+    font-family: "VT323", monospace;
+    font-size: 22px;
+    line-height: 1.4;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.testimonial-form input[type="text"]:focus,
+.testimonial-form textarea:focus {
+    border-color: var(--cream, #fff4bd);
+    box-shadow: 0 0 0 3px rgba(220, 167, 243, 0.15);
+}
+
+.testimonial-form input::placeholder,
+.testimonial-form textarea::placeholder {
+    color: rgba(255, 249, 232, 0.55);
+}
+
+.testimonial-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-hint {
+    margin-top: 8px;
+    color: rgba(255, 249, 232, 0.7);
+    font-size: 18px;
+}
+
+
+/* Interactive star rating */
+
+.rating-options {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+}
+
+.rating-options input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.rating-options label {
+    color: rgba(255, 249, 232, 0.3);
+    font-size: 39px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.rating-options label:hover,
+.rating-options label:hover ~ label,
+.rating-options input:checked ~ label {
+    color: var(--cream, #fff4bd);
+}
+
+.rating-options label:hover {
+    transform: scale(1.12);
+}
+
+.rating-options input:focus-visible + label {
+    outline: 2px solid var(--cream, #fff4bd);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.testimonial-form-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.testimonial-form-actions button {
+    font-family: "VT323", monospace;
+}
+
+
+/* Success and validation notices */
+
+.testimonial-notices {
+    margin: 0 auto 25px;
+    padding: 14px 18px;
+    border: 1px solid rgba(220, 167, 243, 0.55);
+    border-radius: 10px;
+    background: rgba(75, 48, 112, 0.6);
+    color: var(--cream, #fff4bd);
+    text-align: center;
+    font-size: 21px;
+}
+
+.testimonial-notices p {
+    margin: 4px 0;
+}
+
+
+/* Footer */
+
+.testimonials-footer {
+    margin-top: 45px;
+    text-align: center;
+    color: rgba(255, 249, 232, 0.65);
+}
+
+.testimonials-footer p {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.testimonials-footer span {
+    display: block;
+    margin-top: 10px;
+    color: var(--lavender, #dca7f3);
+    font-size: 23px;
+}
+
+
+/* Home page Testimonials button */
+
+.testimonials-home-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 2s;
+}
+
+.testimonials-home-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 22px;
+    border: 1px solid var(--lavender, #dca7f3);
+    border-radius: 10px;
+    background: rgba(33, 19, 63, 0.82);
+    color: var(--cream, #fff4bd);
+    font-family: "VT323", monospace;
+    font-size: 22px;
+    text-decoration: none;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.testimonials-home-button:hover {
+    transform: translateY(-2px);
+    background: rgba(75, 48, 112, 0.95);
+    box-shadow: 0 0 20px rgba(220, 167, 243, 0.25);
+}
+
+
+/* Responsive layouts */
+
+@media (max-width: 700px) {
+    .testimonials-container,
+    .testimonial-form-container {
+        width: calc(100% - 28px);
+        padding-top: 35px;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .testimonials-header {
+        margin-bottom: 30px;
+    }
+
+    .testimonials-header h1 {
+        font-size: 19px;
+        line-height: 1.8;
+    }
+
+    .testimonials-eyebrow {
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+
+    .testimonials-intro {
+        font-size: 22px;
+    }
+
+    .testimonial-card {
+        padding: 21px;
+    }
+
+    .testimonial-form {
+        padding: 21px;
+    }
+
+    .testimonial-form-actions {
+        flex-direction: column;
+    }
+
+    .testimonial-form-actions .testimonial-button {
+        width: 100%;
+    }
+
+    .testimonials-navigation {
+        flex-direction: column;
+    }
+
+    .testimonials-navigation .testimonial-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-star {
+        animation: none;
+    }
+
+    .testimonial-card,
+    .testimonial-button,
+    .testimonials-home-button {
+        transition: none;
+    }
+}
+
+.testimonial-card {
+    text-align: left;
+}
+
+.testimonial-title {
+    text-align: left;
+}
+
+.testimonial-author {
+    justify-content: flex-start;
+    text-align: left;
+}

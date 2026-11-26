@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Testimonials | Wish Upon Jupiter</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="testimonials-page">
+
+    <div class="testimonials-background" aria-hidden="true">
+        <span class="testimonial-star star-one">✦</span>
+        <span class="testimonial-star star-two">✧</span>
+        <span class="testimonial-star star-three">✦</span>
+        <span class="testimonial-star star-four">✧</span>
+        <span class="testimonial-star star-five">✦</span>
+        <span class="testimonial-star star-six">✧</span>
+    </div>
+
+    <main class="testimonials-container">
+
+        <header class="testimonials-header">
+
+            <div class="testimonials-emblem" aria-hidden="true">
+                ✦ 🪐 ✦
+            </div>
+
+            <p class="testimonials-eyebrow">
+                LITTLE WORDS, BIG UNIVERSE
+            </p>
+
+            <h1>WORDS FROM THE STARS</h1>
+
+            <p class="testimonials-intro">
+                Every story leaves a little light behind.
+                <br>
+                Here's what people have shared with us.
+            </p>
+
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="testimonial-notices" role="status">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="testimonials-grid">
+
+            {% if testimonials %}
+
+                {% for testimonial in testimonials %}
+
+                    <article class="testimonial-card">
+
+                        <div class="testimonial-card-top">
+
+                            <span class="testimonial-orbit">✧</span>
+
+                            <div
+                                class="testimonial-rating"
+                                aria-label="{{ testimonial['rating'] }} out of 5 stars"
+                            >
+                                {% for star in range(1, 6) %}
+                                    {% if star <= testimonial['rating'] %}
+                                        <span class="star-filled">★</span>
+                                    {% else %}
+                                        <span class="star-empty">☆</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        {% if testimonial['title'] %}
+                            <h2 class="testimonial-title">
+                                {{ testimonial['title'] }}
+                            </h2>
+                        {% endif %}
+
+                        <p class="testimonial-message">
+                            {{ testimonial['message'] }}
+                        </p>
+
+                        <div class="testimonial-divider">
+                            <span>✦</span>
+                        </div>
+
+                        <div class="testimonial-author">
+                            <span class="testimonial-author-icon">☾</span>
+
+                            <span>
+                                {{ testimonial['name'] or 'Anonymous' }}
+                            </span>
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            {% else %}
+
+                <section class="testimonials-empty">
+
+                    <div class="empty-moon">☾</div>
+
+                    <h2>A quiet corner of the universe...</h2>
+
+                    <p>
+                        No testimonials have arrived yet.
+                        <br>
+                        Be the first to leave a little stardust!
+                    </p>
+
+                    <a
+                        href="{{ url_for('write_testimonial') }}"
+                        class="testimonial-button"
+                    >
+                        ✦ Write the First Testimonial ✦
+                    </a>
+
+                </section>
+
+            {% endif %}
+
+        </div>
+
+        <nav class="testimonials-navigation" aria-label="Testimonials navigation">
+
+            <a href="{{ url_for('home') }}" class="testimonial-button secondary">
+                ← Back to Home
+            </a>
+
+            <a href="{{ url_for('write_testimonial') }}" class="testimonial-button">
+                ✧ Write a Testimonial ✧
+            </a>
+
+        </nav>
+
+        <footer class="testimonials-footer">
+            <p>MADE OF WISHES, MEMORIES & STARDUST</p>
+            <span>✦ ✧ 🪐 ✧ ✦</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

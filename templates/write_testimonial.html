@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Write a Testimonial | Wish Upon Jupiter</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="testimonials-page">
+
+    <main class="testimonial-form-container">
+
+        <header class="testimonials-header">
+
+            <div class="testimonials-emblem" aria-hidden="true">
+                ✦ 🪐 ✦
+            </div>
+
+            <p class="testimonials-eyebrow">
+                LEAVE A LITTLE STARDUST
+            </p>
+
+            <h1>WRITE A TESTIMONIAL</h1>
+
+            <p class="testimonials-intro">
+                Every experience has a story.
+                <br>
+                We'd love to hear yours.
+            </p>
+
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="testimonial-notices" role="status">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form
+            class="testimonial-form"
+            action="{{ url_for('write_testimonial') }}"
+            method="POST"
+        >
+
+            <div class="testimonial-form-group">
+
+                <label for="title">
+                    Testimonial Title
+                    <span class="optional-label">(Optional)</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    maxlength="100"
+                    placeholder="Give your experience a title..."
+                >
+
+            </div>
+
+            <div class="testimonial-form-group">
+
+                <label for="name">
+                    Your Name or Nickname
+                    <span class="optional-label">(Optional)</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    maxlength="60"
+                    placeholder="Leave blank to stay Anonymous"
+                >
+
+            </div>
+
+            <fieldset class="testimonial-form-group rating-group">
+
+                <legend>Your Rating <span class="required-label">*</span></legend>
+
+                <div class="rating-options">
+
+                    <input
+                        type="radio"
+                        id="rating-5"
+                        name="rating"
+                        value="5"
+                        required
+                    >
+                    <label for="rating-5" aria-label="5 stars">★</label>
+
+                    <input
+                        type="radio"
+                        id="rating-4"
+                        name="rating"
+                        value="4"
+                    >
+                    <label for="rating-4" aria-label="4 stars">★</label>
+
+                    <input
+                        type="radio"
+                        id="rating-3"
+                        name="rating"
+                        value="3"
+                    >
+                    <label for="rating-3" aria-label="3 stars">★</label>
+
+                    <input
+                        type="radio"
+                        id="rating-2"
+                        name="rating"
+                        value="2"
+                    >
+                    <label for="rating-2" aria-label="2 stars">★</label>
+
+                    <input
+                        type="radio"
+                        id="rating-1"
+                        name="rating"
+                        value="1"
+                    >
+                    <label for="rating-1" aria-label="1 star">★</label>
+
+                </div>
+
+                <small class="form-hint">
+                    Choose between 1 and 5 stars.
+                </small>
+
+            </fieldset>
+
+            <div class="testimonial-form-group">
+
+                <label for="message">
+                    Your Testimonial
+                    <span class="required-label">*</span>
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    maxlength="2000"
+                    placeholder="Share your thoughts with us..."
+                    required
+                ></textarea>
+
+                <small class="form-hint">
+                    Maximum 2,000 characters.
+                </small>
+
+            </div>
+
+            <div class="testimonial-form-actions">
+
+                <a
+                    href="{{ url_for('testimonials') }}"
+                    class="testimonial-button secondary"
+                >
+                    ← Go Back
+                </a>
+
+                <button
+                    type="submit"
+                    class="testimonial-button"
+                >
+                    ✦ Submit Testimonial ✦
+                </button>
+
+            </div>
+
+        </form>
+
+        <footer class="testimonials-footer">
+            <p>YOUR WORDS ARE PART OF OUR UNIVERSE</p>
+            <span>✦ ✧ 🪐 ✧ ✦</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

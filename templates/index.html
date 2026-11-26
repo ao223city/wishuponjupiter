@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wish Upon Jupiter</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<audio id="journey-music" preload="auto">
+    <source
+        src="{{ url_for('static', filename='audio/wish-journey.mp3') }}"
+        type="audio/mpeg"
+    >
+</audio>
+
+<main class="landing-page" id="landing-page">
+
+    <div class="background"></div>
+
+    <div
+        class="star-field"
+        id="star-field"
+        aria-hidden="true"
+    ></div>
+
+    <div class="background-overlay"></div>
+
+    <div
+        class="space-journey"
+        id="space-journey"
+        aria-hidden="true"
+    >
+
+        <div
+            class="journey-stars journey-stars-far"
+            id="journey-stars-far"
+        ></div>
+
+        <div
+            class="journey-stars journey-stars-mid"
+            id="journey-stars-mid"
+        ></div>
+
+        <div
+            class="journey-stars journey-stars-near"
+            id="journey-stars-near"
+        ></div>
+
+    </div>
+
+    <section class="content">
+
+        <header class="hero">
+
+            <div class="jupiter-divider">
+
+                <span class="divider-star">✦</span>
+
+                <span
+                    class="jupiter-icon"
+                    aria-label="Jupiter"
+                >
+                    <span class="jupiter-ring"></span>
+
+                    <span class="jupiter-planet">
+                        <span class="jupiter-band band-1"></span>
+                        <span class="jupiter-band band-2"></span>
+                        <span class="jupiter-band band-3"></span>
+                    </span>
+                </span>
+
+                <span class="divider-star">✦</span>
+
+            </div>
+
+            <h1>WISH UPON JUPITER</h1>
+
+            <p class="intro">
+                A small digital space for wishes, memories,<br>
+                thoughts, and things left unsaid.
+            </p>
+
+        </header>
+
+        <section
+            class="wish-area"
+            id="wish-area"
+        >
+
+            <h2>
+                <span>✦</span>
+                What would you send into the stars?
+                <span>✦</span>
+            </h2>
+
+            <form id="wish-form">
+
+                <div
+                    class="wish-box-wrapper"
+                    id="wish-box-wrapper"
+                >
+
+                    <textarea
+                        id="wish-input"
+                        name="wish"
+                        maxlength="500"
+                        placeholder="Write your wish here...(wait 5 seconds before sending)"
+                        aria-label="Write your wish here"
+                        required
+                    ></textarea>
+
+                    <div
+                        class="capsule"
+                        id="capsule"
+                        aria-hidden="true"
+                    >
+
+                        <div class="capsule-window">
+                            <span id="capsule-wish"></span>
+                        </div>
+
+                        <div class="capsule-detail"></div>
+
+                        <div class="capsule-exhaust">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="send-button"
+                >
+                    SEND MY WISH TO JUPITER
+                    <span>✦</span>
+                </button>
+
+            </form>
+
+            <!-- Testimonials button -->
+            <div class="testimonials-home-container">
+                <a
+                    href="{{ url_for('testimonials') }}"
+                    class="testimonials-home-button"
+                >
+                    ✨ Read Our Testimonials ✨
+                </a>
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     PAGE 2 — SPACE JOURNEY
+     ===================================================== -->
+
+<section class="journey-scene" id="journey-scene">
+
+    <div class="journey-sky"></div>
+
+    <div
+        class="journey-star-field"
+        id="journey-star-field"
+        aria-hidden="true"
+    ></div>
+
+    <div class="journey-scanlines"></div>
+
+    <div class="journey-content">
+
+        <!-- Journey capsule -->
+        <div
+            class="journey-capsule"
+            id="journey-capsule"
+        >
+            <div class="journey-capsule-window">
+                <span id="journey-capsule-wish"></span>
+            </div>
+
+            <div class="journey-capsule-detail"></div>
+
+            <div class="journey-capsule-exhaust">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Journey text -->
+        <p class="journey-text" id="journey-text">
+            Your wish is drifting through the stars...
+        </p>
+
+        <!-- Mars Encounter -->
+        <div
+            id="mars-encounter"
+            class="planet-encounter mars-encounter"
+            aria-hidden="true"
+        >
+            <div class="mars-planet"></div>
+            <div class="mars-moon mars-moon-one"></div>
+            <div class="mars-moon mars-moon-two"></div>
+        </div>
+
+        <!-- Saturn Encounter -->
+        <div
+            id="saturn-encounter"
+            class="planet-encounter saturn-encounter"
+            aria-hidden="true"
+        >
+            <div class="saturn-planet">
+
+                <!-- Back portion of Saturn's rings -->
+                <div class="saturn-rings saturn-rings-back"></div>
+
+                <!-- Saturn's body -->
+                <div class="saturn-body"></div>
+
+                <!-- Front portion of Saturn's rings -->
+                <div class="saturn-rings saturn-rings-front"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 3 — JUPITER'S FINAL MESSAGE
+     ===================================================== -->
+
+<section class="final-scene" id="final-scene">
+
+    <!-- Dreamy space background -->
+    <div class="final-sky"></div>
+
+    <!-- Background stars -->
+    <div
+        class="final-star-field"
+        id="final-star-field"
+        aria-hidden="true"
+    ></div>
+
+    <!-- Large pixel-art Jupiter -->
+    <div class="final-jupiter" id="final-jupiter">
+
+        <div class="final-jupiter-glow"></div>
+
+        <!-- Birthday magic: glowing orbital rings -->
+        <div class="birthday-rings" aria-hidden="true">
+            <div class="birthday-ring birthday-ring-one"></div>
+            <div class="birthday-ring birthday-ring-two"></div>
+            <div class="birthday-ring birthday-ring-three"></div>
+        </div>
+
+        <!-- Birthday magic: swirling particles -->
+        <div class="birthday-particles" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Birthday magic: constellation -->
+        <div class="birthday-constellation" aria-hidden="true">
+
+            <span class="constellation-star star-one"></span>
+            <span class="constellation-star star-two"></span>
+            <span class="constellation-star star-three"></span>
+            <span class="constellation-star star-four"></span>
+            <span class="constellation-star star-five"></span>
+
+            <span class="constellation-line line-one"></span>
+            <span class="constellation-line line-two"></span>
+            <span class="constellation-line line-three"></span>
+            <span class="constellation-line line-four"></span>
+
+        </div>
+
+        <div class="final-jupiter-planet">
+
+            <div class="final-jupiter-band final-band-1"></div>
+            <div class="final-jupiter-band final-band-2"></div>
+            <div class="final-jupiter-band final-band-3"></div>
+            <div class="final-jupiter-band final-band-4"></div>
+
+            <div class="final-jupiter-storm"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Three final comets will appear here -->
+    <div
+        class="final-comet-field"
+        id="final-comet-field"
+        aria-hidden="true"
+    ></div>
+
+    <!-- Capsule's final arrival star -->
+    <div
+        class="final-arrival-star"
+        id="final-arrival-star"
+        aria-hidden="true"
+    ></div>
+
+    <!-- Messages from Jupiter -->
+    <div class="final-message-container">
+
+        <p class="final-message" id="final-message"></p>
+
+    </div>
+
+</section>
+
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
